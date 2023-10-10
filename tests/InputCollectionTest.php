@@ -27,7 +27,7 @@ class InputCollectionTest extends TestCase
     */
     public function testCanBeCreated(): void
     {
-        $collection = new InputCollection([ ]);
+        $collection = new InputCollection([]);
         $this->assertInstanceOf(InputCollection::class, $collection);
         $this->assertInstanceOf(InputCollectionInterface::class, $collection);
     }
