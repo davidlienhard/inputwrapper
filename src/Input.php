@@ -9,9 +9,9 @@
 
 namespace DavidLienhard\InputWrapper;
 
-use DavidLienhard\InputWrapper\InputInterface;
 use DavidLienhard\InputWrapper\InputCollection;
 use DavidLienhard\InputWrapper\InputCollectionInterface;
+use DavidLienhard\InputWrapper\InputInterface;
 
 /**
  * wraps superglobals into an object

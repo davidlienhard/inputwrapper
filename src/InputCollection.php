@@ -9,8 +9,8 @@
 
 namespace DavidLienhard\InputWrapper;
 
-use DavidLienhard\InputWrapper\InputCollectionInterface;
 use DavidLienhard\InputWrapper\Exception as InputWrapperException;
+use DavidLienhard\InputWrapper\InputCollectionInterface;
 
 /**
  * Methods for a comfortable use of the {@link http://www.mysql.com mySQL} database
@@ -25,7 +25,7 @@ class InputCollection implements InputCollectionInterface
      *
      * @author          David Lienhard <github@lienhard.win>
      * @copyright       David Lienhard
-     * @param           array<(int|string), (int|float|string|bool|null|array)> $data data to store
+     * @param           array<(int|string), (int|float|string|bool|array|null)> $data data to store
      */
     public function __construct(private array $data)
     {
@@ -37,7 +37,7 @@ class InputCollection implements InputCollectionInterface
      *
      * @author          David Lienhard <github@lienhard.win>
      * @copyright       David Lienhard
-     * @return          array<(int|string), (int|float|string|bool|null|array)>
+     * @return          array<(int|string), (int|float|string|bool|array|null)>
      */
     public function isset(int|string $key) : bool
     {
@@ -49,7 +49,7 @@ class InputCollection implements InputCollectionInterface
      *
      * @author          David Lienhard <github@lienhard.win>
      * @copyright       David Lienhard
-     * @return          array<(int|string), (int|float|string|bool|null|array)>
+     * @return          array<(int|string), (int|float|string|bool|array|null)>
      */
     public function all() : array
     {
@@ -64,7 +64,7 @@ class InputCollection implements InputCollectionInterface
      * @param           int|string          $key         key to use
      * @throws          \DavidLienhard\InputWrapper\Exception if any mysqli function failed
      */
-    public function raw(int|string $key) : int|float|string|bool|null|array
+    public function raw(int|string $key) : int|float|string|bool|array|null
     {
         if (!\array_key_exists($key, $this->data)) {
             throw new InputWrapperException("key '".$key."' does not exist");

@@ -9,8 +9,6 @@
 
 namespace DavidLienhard\InputWrapper;
 
-use DavidLienhard\InputWrapper\Exception as InputWrapperException;
-
 /**
  * Methods for a comfortable use of the {@link http://www.mysql.com mySQL} database
  *
@@ -24,7 +22,7 @@ interface InputCollectionInterface
      *
      * @author          David Lienhard <github@lienhard.win>
      * @copyright       David Lienhard
-     * @param           array<(int|string), (int|float|string|bool|null|array)> $data data to store
+     * @param           array<(int|string), (int|float|string|bool|array|null)> $data data to store
      */
     public function __construct(array $data);
 
@@ -42,7 +40,7 @@ interface InputCollectionInterface
      *
      * @author          David Lienhard <github@lienhard.win>
      * @copyright       David Lienhard
-     * @return          array<(int|string), (int|float|string|bool|null|array)>
+     * @return          array<(int|string), (int|float|string|bool|array|null)>
      */
     public function isset(int|string $key) : bool;
 
@@ -54,7 +52,7 @@ interface InputCollectionInterface
      * @param           int|string          $key         key to use
      * @throws          \DavidLienhard\InputWrapper\Exception if any mysqli function failed
      */
-    public function raw(int|string $key) : int|float|string|bool|null|array;
+    public function raw(int|string $key) : int|float|string|bool|array|null;
 
     /**
      * returns one single element from the row as an int
