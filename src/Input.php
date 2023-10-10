@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 
 /**
- * contains a custom mysql class
+ * wrapper for superglobals like post & get
  *
  * @author          David Lienhard <github@lienhard.win>
  * @copyright       David Lienhard
@@ -14,7 +14,7 @@ use DavidLienhard\InputWrapper\InputCollection;
 use DavidLienhard\InputWrapper\InputCollectionInterface;
 
 /**
- * Methods for a comfortable use of the {@link http://www.mysql.com mySQL} database
+ * wraps superglobals into an object
  *
  * @author          David Lienhard <github@lienhard.win>
  * @copyright       David Lienhard

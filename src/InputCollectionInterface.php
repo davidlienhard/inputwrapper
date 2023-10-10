@@ -38,6 +38,15 @@ interface InputCollectionInterface
     public function all() : array;
 
     /**
+     * checks if the given key exists
+     *
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
+     * @return          array<(int|string), (int|float|string|bool|null|array)>
+     */
+    public function isset(int|string $key) : bool;
+
+    /**
      * returns one single element from the row
      *
      * @author          David Lienhard <github@lienhard.win>

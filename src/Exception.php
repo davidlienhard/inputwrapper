@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 
 /**
- * Database Exception Class
+ * Input Wrapper Exception Class
  *
  * @author          David Lienhard <github@lienhard.win>
  * @copyright       David Lienhard
@@ -10,7 +10,7 @@
 namespace DavidLienhard\InputWrapper;
 
 /**
- * Database Exception Class
+ * Input Wrapper Exception Class
  *
  * @author          David Lienhard <github@lienhard.win>
  * @copyright       David Lienhard

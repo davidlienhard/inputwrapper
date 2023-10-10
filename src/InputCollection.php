@@ -33,6 +33,18 @@ class InputCollection implements InputCollectionInterface
     }
 
     /**
+     * checks if the given key exists
+     *
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
+     * @return          array<(int|string), (int|float|string|bool|null|array)>
+     */
+    public function isset(int|string $key) : bool
+    {
+        return \array_key_exists($key, $this->data);
+    }
+
+    /**
      * returns the whole row as an array
      *
      * @author          David Lienhard <github@lienhard.win>
