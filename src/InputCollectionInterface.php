@@ -40,7 +40,7 @@ interface InputCollectionInterface
      *
      * @author          David Lienhard <github@lienhard.win>
      * @copyright       David Lienhard
-     * @return          array<(int|string), (int|float|string|bool|array|null)>
+     * @param           int|string          $key         key to use
      */
     public function isset(int|string $key) : bool;
 
