@@ -11,27 +11,25 @@ use DavidLienhard\InputWrapper\InputCollection;
 use DavidLienhard\InputWrapper\InputCollectionInterface;
 use PHPUnit\Framework\TestCase;
 
-class InputCollectionTest extends TestCase
+class InputCollectionIssetTest extends TestCase
 {
     /**
      * @covers \DavidLienhard\InputWrapper\InputCollection
      * @test
     */
-    public function testCannotBeCreatedWithoutParameters(): void
+    public function testIssetInexistentValueReturnFalse(): void
     {
-        $this->expectException(\ArgumentCountError::class);
-        // phpcs:ignore
-        $collection = new InputCollection;
+        $collection = new InputCollection([]);
+        $this->assertFalse($collection->isset("doesnotexist"));
     }
 
     /**
      * @covers \DavidLienhard\InputWrapper\InputCollection
      * @test
     */
-    public function testCanBeCreated(): void
+    public function testIssetExistingValueReturnTrue(): void
     {
-        $collection = new InputCollection([]);
-        $this->assertInstanceOf(InputCollection::class, $collection);
-        $this->assertInstanceOf(InputCollectionInterface::class, $collection);
+        $collection = new InputCollection([ "key" => "value" ]);
+        $this->assertTrue($collection->isset("key"));
     }
 }

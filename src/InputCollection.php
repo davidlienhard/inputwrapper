@@ -105,7 +105,7 @@ class InputCollection implements InputCollectionInterface
     public function asNullableInt(int|string $key) : int|null
     {
         if (!\array_key_exists($key, $this->data)) {
-            throw new InputWrapperException("key '".$key."' does not exist");
+            return null;
         }
 
         if (\is_array($this->data[$key])) {
