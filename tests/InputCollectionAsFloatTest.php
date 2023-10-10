@@ -10,25 +10,25 @@ use DavidLienhard\InputWrapper\Exception as InputWrapperException;
 use DavidLienhard\InputWrapper\InputCollection;
 use PHPUnit\Framework\TestCase;
 
-class InputCollectionAsIntTest extends TestCase
+class InputCollectionAsFloatTest extends TestCase
 {
     /**
      * @covers \DavidLienhard\InputWrapper\InputCollection
      * @test
     */
-    public function testAsIntThrowsOnInexistentValue(): void
+    public function testAsFloatThrowsOnInexistentValue(): void
     {
         $collection = new InputCollection([]);
 
         $this->expectException(InputWrapperException::class);
-        $collection->asInt("doesnotexist");
+        $collection->asFloat("doesnotexist");
     }
 
     /**
      * @covers \DavidLienhard\InputWrapper\InputCollection
      * @test
     */
-    public function testAsIntReturnsDataAsInt(): void
+    public function testAsFloatReturnsDataAsFloat(): void
     {
         $testData = [
             [
@@ -41,7 +41,7 @@ class InputCollectionAsIntTest extends TestCase
             ],
             [
                 "input"    => 0.0,
-                "expected" => 0
+                "expected" => 0.0
             ],
             [
                 "input"    => -5,
@@ -53,11 +53,11 @@ class InputCollectionAsIntTest extends TestCase
             ],
             [
                 "input"    => 0.5,
-                "expected" => 0
+                "expected" => 0.5
             ],
             [
                 "input"    => 10.4,
-                "expected" => 10
+                "expected" => 10.4
             ],
             [
                 "input"    => true,
@@ -79,8 +79,8 @@ class InputCollectionAsIntTest extends TestCase
 
         foreach ($testData as $case) {
             $collection = new InputCollection([ "key" => $case['input'] ]);
-            $value = $collection->asInt("key");
-            $this->assertIsInt($value);
+            $value = $collection->asFloat("key");
+            $this->assertIsFloat($value);
             $this->assertEquals($case['expected'], $value, "given input: ".$case['input']);
         }
     }
@@ -89,39 +89,39 @@ class InputCollectionAsIntTest extends TestCase
      * @covers \DavidLienhard\InputWrapper\InputCollection
      * @test
     */
-    public function testAsIntThrowsOnArray(): void
+    public function testAsFloatThrowsOnArray(): void
     {
         $collection = new InputCollection([ "key" => []]);
         $this->expectException(InputWrapperException::class);
-        $collection->asInt("key");
+        $collection->asFloat("key");
     }
 
     /**
      * @covers \DavidLienhard\InputWrapper\InputCollection
      * @test
     */
-    public function testAsNullableIntReturnsNullOnInexistentValue(): void
+    public function testAsNullableFloatReturnsNullOnInexistentValue(): void
     {
         $collection = new InputCollection([]);
-        $this->assertNull($collection->asNullableInt("doesnotexist"));
+        $this->assertNull($collection->asNullableFloat("doesnotexist"));
     }
 
     /**
      * @covers \DavidLienhard\InputWrapper\InputCollection
      * @test
     */
-    public function testAsNullableIntThrowsOnArray(): void
+    public function testAsNullableFloatThrowsOnArray(): void
     {
         $collection = new InputCollection([ "key" => []]);
         $this->expectException(InputWrapperException::class);
-        $collection->asNullableInt("key");
+        $collection->asNullableFloat("key");
     }
 
     /**
      * @covers \DavidLienhard\InputWrapper\InputCollection
      * @test
     */
-    public function testAsNullableIntReturnsDataAsInt(): void
+    public function testAsNullableFloatReturnsDataAsFloat(): void
     {
         $testData = [
             [
@@ -146,11 +146,11 @@ class InputCollectionAsIntTest extends TestCase
             ],
             [
                 "input"    => 0.5,
-                "expected" => 0
+                "expected" => 0.5
             ],
             [
                 "input"    => 10.4,
-                "expected" => 10
+                "expected" => 10.4
             ],
             [
                 "input"    => true,
@@ -172,7 +172,7 @@ class InputCollectionAsIntTest extends TestCase
 
         foreach ($testData as $case) {
             $collection = new InputCollection([ "key" => $case['input'] ]);
-            $value = $collection->asNullableInt("key");
+            $value = $collection->asNullableFloat("key");
             $this->assertEquals($case['expected'], $value, "given input: ".$case['input']);
         }
     }

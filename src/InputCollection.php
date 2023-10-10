@@ -149,7 +149,7 @@ class InputCollection implements InputCollectionInterface
     public function asNullableFloat(int|string $key) : float|null
     {
         if (!\array_key_exists($key, $this->data)) {
-            throw new InputWrapperException("key '".$key."' does not exist");
+            return null;
         }
 
         if (\is_array($this->data[$key])) {
