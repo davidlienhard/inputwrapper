@@ -2,27 +2,28 @@
 
 namespace DavidLienhard;
 
-require_once dirname(__DIR__)."/src/InputCollection.php";
+require_once dirname(__DIR__)."/src/Exception.php";
 require_once dirname(__DIR__)."/src/InputCollectionInterface.php";
+require_once dirname(__DIR__)."/src/InputCollection.php";
 
-use DavidLienhard\Database\InputCollection;
-use DavidLienhard\Database\InputCollectionInterface;
+use DavidLienhard\InputWrapper\InputCollection;
+use DavidLienhard\InputWrapper\InputCollectionInterface;
 use PHPUnit\Framework\TestCase;
 
 class InputCollectionTest extends TestCase
 {
     /**
-     * @covers \DavidLienhard\Database\InputCollection
+     * @covers \DavidLienhard\InputWrapper\InputCollection
      * @test
     */
     public function testCannotBeCreatedWithoutParameters(): void
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(\ArgumentCountError::class);
         // phpcs:ignore
         $collection = new InputCollection;
     }
     /**
-     * @covers \DavidLienhard\Database\InputCollection
+     * @covers \DavidLienhard\InputWrapper\InputCollection
      * @test
     */
     public function testCanBeCreated(): void
