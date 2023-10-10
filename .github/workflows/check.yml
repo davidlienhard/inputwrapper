@@ -16,7 +16,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - run: git fetch origin master
+    - run: git fetch origin main
 
     - name: Setup PHP ${{ matrix.php }}
       uses: shivammathur/setup-php@v2
