@@ -2,78 +2,32 @@
 
 namespace DavidLienhard;
 
-require_once dirname(__DIR__)."/src/Parameter.php";
-require_once dirname(__DIR__)."/src/ParameterInterface.php";
+require_once dirname(__DIR__)."/src/InputCollection.php";
+require_once dirname(__DIR__)."/src/InputCollectionInterface.php";
 
-use DavidLienhard\Database\Parameter;
-use DavidLienhard\Database\ParameterInterface;
+use DavidLienhard\Database\InputCollection;
+use DavidLienhard\Database\InputCollectionInterface;
 use PHPUnit\Framework\TestCase;
 
-class DatabaseParameterTest extends TestCase
+class InputCollectionTest extends TestCase
 {
     /**
-     * @covers \DavidLienhard\Database\Parameter
+     * @covers \DavidLienhard\Database\InputCollection
+     * @test
+    */
+    public function testCannotBeCreatedWithoutParameters(): void
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $collection = new InputCollection;
+    }
+    /**
+     * @covers \DavidLienhard\Database\InputCollection
      * @test
     */
     public function testCanBeCreated(): void
     {
-        $param = new Parameter("i", 1);
-        $this->assertInstanceOf(Parameter::class, $param);
-        $this->assertInstanceOf(ParameterInterface::class, $param);
-    }
-
-    /**
-     * @covers \DavidLienhard\Database\Parameter
-     * @test
-    */
-    public function testTypeValueGetsTested(): void
-    {
-        $this->assertInstanceOf(
-            Parameter::class,
-            new Parameter("i", 1)
-        );
-
-        $this->assertInstanceOf(
-            Parameter::class,
-            new Parameter("s", 1)
-        );
-
-        $this->assertInstanceOf(
-            Parameter::class,
-            new Parameter("d", 1)
-        );
-
-        $this->assertInstanceOf(
-            Parameter::class,
-            new Parameter("b", 1)
-        );
-
-        $this->expectException(\InvalidArgumentException::class);
-        new Parameter("a", 1);
-    }
-
-    /**
-     * @covers \DavidLienhard\Database\Parameter
-     * @test
-    */
-    public function testCetGetType(): void
-    {
-        $type = "i";
-        $value = 1;
-        $param = new Parameter($type, $value);
-
-        $this->assertEquals($type, $param->getType());
-    }
-
-    /**
-     * @covers \DavidLienhard\Database\Parameter
-     * @test
-    */
-    public function testCetGetValue(): void
-    {
-        $type = "i";
-        $value = 1;
-        $param = new Parameter($type, $value);
-        $this->assertEquals($value, $param->getValue());
+        $collection = new InputCollection([ ]);
+        $this->assertInstanceOf(InputCollection::class, $collection);
+        $this->assertInstanceOf(InputCollectionInterface::class, $collection);
     }
 }
