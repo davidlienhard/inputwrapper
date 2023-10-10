@@ -6,7 +6,6 @@ require_once dirname(__DIR__)."/src/Exception.php";
 require_once dirname(__DIR__)."/src/InputCollectionInterface.php";
 require_once dirname(__DIR__)."/src/InputCollection.php";
 
-use DavidLienhard\InputWrapper\Exception as InputWrapperException;
 use DavidLienhard\InputWrapper\InputCollection;
 use DavidLienhard\InputWrapper\InputCollectionInterface;
 use PHPUnit\Framework\TestCase;

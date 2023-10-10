@@ -8,7 +8,6 @@ require_once dirname(__DIR__)."/src/InputCollection.php";
 
 use DavidLienhard\InputWrapper\Exception as InputWrapperException;
 use DavidLienhard\InputWrapper\InputCollection;
-use DavidLienhard\InputWrapper\InputCollectionInterface;
 use PHPUnit\Framework\TestCase;
 
 class InputCollectionAsIntTest extends TestCase
@@ -43,43 +42,43 @@ class InputCollectionAsIntTest extends TestCase
     {
         $testData = [
             [
-                "input" => 1,
+                "input"    => 1,
                 "expected" => 1
             ],
             [
-                "input" => 0,
+                "input"    => 0,
                 "expected" => 0
             ],
             [
-                "input" => -5,
+                "input"    => -5,
                 "expected" => -5
             ],
             [
-                "input" => 10,
+                "input"    => 10,
                 "expected" => 10
             ],
             [
-                "input" => 0.5,
+                "input"    => 0.5,
                 "expected" => 0
             ],
             [
-                "input" => 10.4,
+                "input"    => 10.4,
                 "expected" => 10
             ],
             [
-                "input" => true,
+                "input"    => true,
                 "expected" => 1
             ],
             [
-                "input" => false,
+                "input"    => false,
                 "expected" => 0
             ],
             [
-                "input" => null,
+                "input"    => null,
                 "expected" => 0
             ],
             [
-                "input" => "test",
+                "input"    => "test",
                 "expected" => 0
             ]
         ];
@@ -98,7 +97,7 @@ class InputCollectionAsIntTest extends TestCase
     */
     public function testAsIntThrowsOnArray(): void
     {
-        $collection = new InputCollection([ "key" => [ ]]);
+        $collection = new InputCollection([ "key" => []]);
         $this->expectException(InputWrapperException::class);
         $collection->asInt("key");
     }
