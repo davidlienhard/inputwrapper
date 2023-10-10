@@ -135,4 +135,24 @@ interface InputCollectionInterface
      * @throws          \DavidLienhard\InputWrapper\Exception if any mysqli function failed
      */
     public function asNullableBool(int|string $key) : bool|null;
+
+    /**
+     * returns one single element from the row as a bool
+     *
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
+     * @param           int|string          $key         key to use
+     * @throws          \DavidLienhard\InputWrapper\Exception if any mysqli function failed
+     */
+    public function asArray(int|string $key) : array;
+
+    /**
+     * returns one single element from the row as a array or null
+     *
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
+     * @param           int|string          $key         key to use
+     * @throws          \DavidLienhard\InputWrapper\Exception if any mysqli function failed
+     */
+    public function asNullableArray(int|string $key) : array|null;
 }

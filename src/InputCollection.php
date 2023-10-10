@@ -248,4 +248,46 @@ class InputCollection implements InputCollectionInterface
             ? null
             : \boolval($this->data[$key]);
     }
+
+    /**
+     * returns one single element from the row as a bool
+     *
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
+     * @param           int|string          $key         key to use
+     * @throws          \DavidLienhard\InputWrapper\Exception if any mysqli function failed
+     */
+    public function asArray(int|string $key) : array
+    {
+        if (!\array_key_exists($key, $this->data)) {
+            throw new InputWrapperException("key '".$key."' does not exist");
+        }
+
+        if (!\is_array($this->data[$key])) {
+            throw new InputWrapperException("cannot convert to array");
+        }
+
+        return $this->data[$key];
+    }
+
+    /**
+     * returns one single element from the row as a array or null
+     *
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
+     * @param           int|string          $key         key to use
+     * @throws          \DavidLienhard\InputWrapper\Exception if any mysqli function failed
+     */
+    public function asNullableArray(int|string $key) : array|null
+    {
+        if (!\array_key_exists($key, $this->data)) {
+            throw new InputWrapperException("key '".$key."' does not exist");
+        }
+
+        if (!\is_array($this->data[$key]) && !\is_null($this->data[$key])) {
+            throw new InputWrapperException("cannot convert to array");
+        }
+
+        return $this->data[$key];
+    }
 }
