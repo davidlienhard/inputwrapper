@@ -18,7 +18,7 @@ class InputCollectionTest extends TestCase
     public function testCannotBeCreatedWithoutParameters(): void
     {
         $this->expectException(\InvalidArgumentException::class);
-        // @codingStandardsIgnoreEnd
+        // phpcs:ignore
         $collection = new InputCollection;
     }
     /**
