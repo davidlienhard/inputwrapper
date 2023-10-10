@@ -34,7 +34,7 @@
         ]
     },
     "scripts": {
-        "changed-files": "git diff --name-only origin/master",
+        "changed-files": "git diff --name-only origin/main",
         "phpunit": "./vendor/bin/phpunit",
         "phpcs": "./vendor/bin/phpcs",
         "phpcs-diff": "@composer changed-files | xargs ls -d 2>/dev/null | xargs ./vendor/bin/phpcs",
