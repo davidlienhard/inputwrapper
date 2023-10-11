@@ -40,11 +40,23 @@ class Input implements InputInterface
         $this->post = new InputCollection($_POST);
     }
 
+    /**
+     * returns the contents of the _GET superglobal as an InputCollectionInterface
+     *
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
+     */
     public function get() : InputCollectionInterface
     {
         return $this->get;
     }
 
+    /**
+     * returns the contents of the _POST superglobal as an InputCollectionInterface
+     *
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
+     */
     public function post() : InputCollectionInterface
     {
         return $this->post;
