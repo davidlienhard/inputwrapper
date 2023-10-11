@@ -17,7 +17,7 @@ use PHPUnit\Framework\TestCase;
 class InputTest extends TestCase
 {
     /**
-     * @covers \DavidLienhard\InputWrapper\InputCollection
+     * @covers \DavidLienhard\InputWrapper\Input
      * @test
     */
     public function testCanBeCreated(): void
@@ -28,7 +28,7 @@ class InputTest extends TestCase
     }
 
     /**
-     * @covers \DavidLienhard\InputWrapper\InputCollection
+     * @covers \DavidLienhard\InputWrapper\Input
      * @test
     */
     public function testGetReturnsCollection(): void
@@ -41,7 +41,7 @@ class InputTest extends TestCase
     }
 
     /**
-     * @covers \DavidLienhard\InputWrapper\InputCollection
+     * @covers \DavidLienhard\InputWrapper\Input
      * @test
     */
     public function testPostReturnsCollection(): void
