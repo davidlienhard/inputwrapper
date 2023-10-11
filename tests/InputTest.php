@@ -9,9 +9,9 @@ require_once dirname(__DIR__)."/src/InputCollectionInterface.php";
 require_once dirname(__DIR__)."/src/InputCollection.php";
 
 use DavidLienhard\InputWrapper\Input;
-use DavidLienhard\InputWrapper\InputInterface;
 use DavidLienhard\InputWrapper\InputCollection;
 use DavidLienhard\InputWrapper\InputCollectionInterface;
+use DavidLienhard\InputWrapper\InputInterface;
 use PHPUnit\Framework\TestCase;
 
 class InputTest extends TestCase
@@ -23,8 +23,8 @@ class InputTest extends TestCase
     public function testCanBeCreated(): void
     {
         $input = new Input;
-        $this->assertInstanceOf(Input::class, $collection);
-        $this->assertInstanceOf(InputInterface::class, $collection);
+        $this->assertInstanceOf(Input::class, $input);
+        $this->assertInstanceOf(InputInterface::class, $input);
     }
 
     /**
@@ -36,8 +36,8 @@ class InputTest extends TestCase
         $input = new Input;
 
         $get = $input->get();
-        $this->assertInstanceOf(InputCollection::class, $collection);
-        $this->assertInstanceOf(InputCollectionInterface::class, $collection);
+        $this->assertInstanceOf(InputCollection::class, $get);
+        $this->assertInstanceOf(InputCollectionInterface::class, $get);
     }
 
     /**
@@ -48,8 +48,8 @@ class InputTest extends TestCase
     {
         $input = new Input;
 
-        $get = $input->post();
-        $this->assertInstanceOf(InputCollection::class, $collection);
-        $this->assertInstanceOf(InputCollectionInterface::class, $collection);
+        $post = $input->post();
+        $this->assertInstanceOf(InputCollection::class, $post);
+        $this->assertInstanceOf(InputCollectionInterface::class, $post);
     }
 }
