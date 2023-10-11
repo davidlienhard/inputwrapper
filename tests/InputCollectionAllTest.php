@@ -2,7 +2,6 @@
 
 namespace DavidLienhard;
 
-require_once dirname(__DIR__)."/src/Exception.php";
 require_once dirname(__DIR__)."/src/InputCollectionInterface.php";
 require_once dirname(__DIR__)."/src/InputCollection.php";
 
@@ -42,9 +41,9 @@ class InputCollectionRawTest extends TestCase
             ]
         ];
 
-        $collection = new InputCollection([ $testData ]);
+        $collection = new InputCollection([ $testDataNum ]);
         $value = $collection->all();
-        $this->assertEquals($testData, $value);
+        $this->assertEquals($testDataNum, $value);
 
 
         $testDataAssoc = [
@@ -64,15 +63,15 @@ class InputCollectionRawTest extends TestCase
                 "key"   => 1,
                 "value" => "test"
             ],
-            "array3"      => [
+            "array3"       => [
                 "list",
                 "to",
                 "test"
             ]
         ];
 
-        $collection = new InputCollection([ $testData ]);
+        $collection = new InputCollection([ $testDataAssoc ]);
         $value = $collection->all();
-        $this->assertEquals($testData, $value);
+        $this->assertEquals($testDataAssoc, $value);
     }
 }
