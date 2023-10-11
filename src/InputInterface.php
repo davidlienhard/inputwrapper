@@ -27,7 +27,21 @@ interface InputInterface
      */
     public function __construct();
 
+
+    /**
+     * returns the contents of the _GET superglobal as an InputCollectionInterface
+     *
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
+     */
     public function get() : InputCollectionInterface;
 
+
+    /**
+     * returns the contents of the _POST superglobal as an InputCollectionInterface
+     *
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
+     */
     public function post() : InputCollectionInterface;
 }
