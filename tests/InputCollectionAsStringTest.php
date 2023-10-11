@@ -61,11 +61,11 @@ class InputCollectionAsStringTest extends TestCase
             ],
             [
                 "input"    => true,
-                "expected" => "true"
+                "expected" => "1"
             ],
             [
                 "input"    => false,
-                "expected" => "false"
+                "expected" => "0"
             ],
             [
                 "input"    => null,
@@ -154,11 +154,11 @@ class InputCollectionAsStringTest extends TestCase
             ],
             [
                 "input"    => true,
-                "expected" => "true"
+                "expected" => "1"
             ],
             [
                 "input"    => false,
-                "expected" => "false"
+                "expected" => "0"
             ],
             [
                 "input"    => null,

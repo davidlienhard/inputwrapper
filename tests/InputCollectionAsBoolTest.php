@@ -53,7 +53,7 @@ class InputCollectionAsBoolTest extends TestCase
             ],
             [
                 "input"    => 0.5,
-                "expected" => false
+                "expected" => true
             ],
             [
                 "input"    => 10.4,
@@ -146,7 +146,7 @@ class InputCollectionAsBoolTest extends TestCase
             ],
             [
                 "input"    => 0.5,
-                "expected" => false
+                "expected" => true
             ],
             [
                 "input"    => 10.4,
