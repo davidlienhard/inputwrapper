@@ -53,11 +53,11 @@ class InputCollectionAsStringTest extends TestCase
             ],
             [
                 "input"    => 0.5,
-                "expected" => "0"
+                "expected" => "0.5"
             ],
             [
                 "input"    => 10.4,
-                "expected" => "10"
+                "expected" => "10.4"
             ],
             [
                 "input"    => true,
@@ -146,11 +146,11 @@ class InputCollectionAsStringTest extends TestCase
             ],
             [
                 "input"    => 0.5,
-                "expected" => "0"
+                "expected" => "0.5"
             ],
             [
                 "input"    => 10.4,
-                "expected" => "10"
+                "expected" => "10.4"
             ],
             [
                 "input"    => true,
