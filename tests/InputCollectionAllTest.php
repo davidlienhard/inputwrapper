@@ -40,7 +40,7 @@ class InputCollectionAllTest extends TestCase
             ]
         ];
 
-        $collection = new InputCollection([ $testDataNum ]);
+        $collection = new InputCollection($testDataNum);
         $value = $collection->all();
         $this->assertEquals($testDataNum, $value);
 
@@ -69,7 +69,7 @@ class InputCollectionAllTest extends TestCase
             ]
         ];
 
-        $collection = new InputCollection([ $testDataAssoc ]);
+        $collection = new InputCollection($testDataAssoc);
         $value = $collection->all();
         $this->assertEquals($testDataAssoc, $value);
     }
