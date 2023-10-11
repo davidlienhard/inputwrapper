@@ -8,7 +8,7 @@ require_once dirname(__DIR__)."/src/InputCollection.php";
 use DavidLienhard\InputWrapper\InputCollection;
 use PHPUnit\Framework\TestCase;
 
-class InputCollectionRawTest extends TestCase
+class InputCollectionAllTest extends TestCase
 {
     /**
      * @covers \DavidLienhard\InputWrapper\InputCollection
