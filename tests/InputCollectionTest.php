@@ -22,6 +22,7 @@ class InputCollectionTest extends TestCase
         // phpcs:ignore
         $collection = new InputCollection;
     }
+
     /**
      * @covers \DavidLienhard\InputWrapper\InputCollection
      * @test

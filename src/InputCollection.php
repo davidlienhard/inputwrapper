@@ -105,7 +105,7 @@ class InputCollection implements InputCollectionInterface
     public function asNullableInt(int|string $key) : int|null
     {
         if (!\array_key_exists($key, $this->data)) {
-            throw new InputWrapperException("key '".$key."' does not exist");
+            return null;
         }
 
         if (\is_array($this->data[$key])) {
@@ -149,7 +149,7 @@ class InputCollection implements InputCollectionInterface
     public function asNullableFloat(int|string $key) : float|null
     {
         if (!\array_key_exists($key, $this->data)) {
-            throw new InputWrapperException("key '".$key."' does not exist");
+            return null;
         }
 
         if (\is_array($this->data[$key])) {
@@ -193,7 +193,7 @@ class InputCollection implements InputCollectionInterface
     public function asNullableString(int|string $key) : string|null
     {
         if (!\array_key_exists($key, $this->data)) {
-            throw new InputWrapperException("key '".$key."' does not exist");
+            return null;
         }
 
         if (\is_array($this->data[$key])) {
@@ -237,7 +237,7 @@ class InputCollection implements InputCollectionInterface
     public function asNullableBool(int|string $key) : bool|null
     {
         if (!\array_key_exists($key, $this->data)) {
-            throw new InputWrapperException("key '".$key."' does not exist");
+            return null;
         }
 
         if (\is_array($this->data[$key])) {
@@ -281,7 +281,7 @@ class InputCollection implements InputCollectionInterface
     public function asNullableArray(int|string $key) : array|null
     {
         if (!\array_key_exists($key, $this->data)) {
-            throw new InputWrapperException("key '".$key."' does not exist");
+            return null;
         }
 
         if (!\is_array($this->data[$key]) && !\is_null($this->data[$key])) {
