@@ -112,7 +112,7 @@ class InputCollectionAsArrayTest extends TestCase
             $collection = new InputCollection([ "key" => $case ]);
 
             $this->expectException(InputWrapperException::class);
-            $collection->asArray("key");
+            $collection->asNullableArray("key");
         }
     }
 
@@ -138,7 +138,7 @@ class InputCollectionAsArrayTest extends TestCase
 
         foreach ($testData as $case) {
             $collection = new InputCollection([ "key" => $case ]);
-            $value = $collection->asArray("key");
+            $value = $collection->asNullableArray("key");
             $this->assertEquals($case, $value);
         }
     }
