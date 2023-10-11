@@ -69,7 +69,7 @@ class InputCollectionAsStringTest extends TestCase
             ],
             [
                 "input"    => null,
-                "expected" => "null"
+                "expected" => ""
             ],
             [
                 "input"    => "test",
