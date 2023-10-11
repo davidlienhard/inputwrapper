@@ -61,7 +61,7 @@ class InputCollectionAsArrayTest extends TestCase
         $testData = [
             [],
             [
-                "key" => 1,
+                "key"   => 1,
                 "value" => "test"
             ],
             [
@@ -125,7 +125,7 @@ class InputCollectionAsArrayTest extends TestCase
         $testData = [
             [],
             [
-                "key" => 1,
+                "key"   => 1,
                 "value" => "test"
             ],
             [
