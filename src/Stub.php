@@ -67,7 +67,7 @@ class Stub implements InputInterface
      *
      * @author          David Lienhard <github@lienhard.win>
      * @copyright       David Lienhard
-     * @param       string      $payload        payload to add
+     * @param       array      $payload        payload to add
      */
     public function addGetPayload(array $payload) : void
     {
@@ -79,7 +79,7 @@ class Stub implements InputInterface
      *
      * @author          David Lienhard <github@lienhard.win>
      * @copyright       David Lienhard
-     * @param       string      $payload        payload to add
+     * @param       array      $payload        payload to add
      */
     public function addPostPayload(array $payload) : void
     {
