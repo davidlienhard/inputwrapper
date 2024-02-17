@@ -44,4 +44,13 @@ interface InputInterface
      * @copyright       David Lienhard
      */
     public function post() : InputCollectionInterface;
+
+
+    /**
+     * returns the contents of the _FILES superglobal as an InputCollectionInterface
+     *
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
+     */
+    public function files() : InputCollectionInterface;
 }

@@ -28,6 +28,10 @@ class Input implements InputInterface
     private InputCollectionInterface $post;
 
 
+    /** contents of files superglobal */
+    private InputCollectionInterface $files;
+
+
     /**
      * store contents of superglobals in this object
      *
@@ -38,6 +42,7 @@ class Input implements InputInterface
     {
         $this->get = new InputCollection($_GET);
         $this->post = new InputCollection($_POST);
+        $this->files = new InputCollection($_FILES);
     }
 
     /**
@@ -60,5 +65,16 @@ class Input implements InputInterface
     public function post() : InputCollectionInterface
     {
         return $this->post;
+    }
+
+    /**
+     * returns the contents of the _FILES superglobal as an InputCollectionInterface
+     *
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
+     */
+    public function files() : InputCollectionInterface
+    {
+        return $this->files;
     }
 }
