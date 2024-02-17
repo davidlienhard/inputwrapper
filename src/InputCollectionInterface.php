@@ -164,4 +164,14 @@ interface InputCollectionInterface
      * @param           int|string|null     $secondaryKey   optional secondary key for multidimensional arrays
      */
     public function asNullableArray(int|string $key, int|string|null $secondaryKey = null) : array|null;
+
+    /**
+     * returns one single file
+     *
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
+     * @param           int|string          $key            key to use
+     * @param           int|string|null     $secondaryKey   optional secondary key for multidimensional arrays
+     */
+    public function asFile(int|string $key, int|string|null $secondaryKey = null) : array;
 }

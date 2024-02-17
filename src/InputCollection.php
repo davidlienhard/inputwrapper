@@ -321,4 +321,23 @@ class InputCollection implements InputCollectionInterface
 
         return $raw;
     }
+
+    /**
+     * returns one file
+     *
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
+     * @param           int|string          $key            key to use
+     * @param           int|string|null     $secondaryKey   optional secondary key for multidimensional arrays
+     */
+    public function asFile(int|string $key, int|string|null $secondaryKey = null) : array
+    {
+        $raw = $this->raw($key, $secondaryKey);
+
+        if (!\is_array($raw)) {
+            throw new InputWrapperException("cannot convert to array");
+        }
+
+        return $raw;
+    }
 }
