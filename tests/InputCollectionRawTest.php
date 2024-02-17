@@ -40,7 +40,6 @@ class InputCollectionRawTest extends TestCase
             10.4,
             true,
             false,
-            null,
             "test",
             [],
             [
