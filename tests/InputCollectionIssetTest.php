@@ -30,4 +30,27 @@ class InputCollectionIssetTest extends TestCase
         $collection = new InputCollection([ "key" => "value" ]);
         $this->assertTrue($collection->isset("key"));
     }
+
+    /**
+     * @covers \DavidLienhard\InputWrapper\InputCollection
+     * @test
+    */
+    public function testIssetMultidimensionalInexistentValueReturnFalse(): void
+    {
+        $collection = new InputCollection([]);
+        $this->assertFalse($collection->isset("doesnotexist", "doesnotexist"));
+
+        $collection = new InputCollection(["doesnotexist" => "value"]);
+        $this->assertFalse($collection->isset("doesnotexist", "doesnotexist"));
+    }
+
+    /**
+     * @covers \DavidLienhard\InputWrapper\InputCollection
+     * @test
+    */
+    public function testIssetMultidimensionalExistingValueReturnTrue(): void
+    {
+        $collection = new InputCollection([ "key" => [ "secondary" => "value" ]]);
+        $this->assertTrue($collection->isset("key", "secondary"));
+    }
 }

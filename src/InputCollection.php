@@ -37,10 +37,17 @@ class InputCollection implements InputCollectionInterface
      *
      * @author          David Lienhard <github@lienhard.win>
      * @copyright       David Lienhard
-     * @param           int|string          $key         key to use
+     * @param           int|string          $key            key to use
+     * @param           int|string|null     $secondaryKey   optional secondary key for multidimensional arrays
      */
-    public function isset(int|string $key) : bool
+    public function isset(int|string $key, int|string|null $secondaryKey = null) : bool
     {
+        if ($secondaryKey !== null) {
+            return \array_key_exists($key, $this->data)
+                && \is_array($this->data[$key])
+                && \array_key_exists($secondaryKey, $this->data[$key]);
+        }
+
         return \array_key_exists($key, $this->data);
     }
 
@@ -61,13 +68,48 @@ class InputCollection implements InputCollectionInterface
      *
      * @author          David Lienhard <github@lienhard.win>
      * @copyright       David Lienhard
-     * @param           int|string          $key         key to use
+     * @param           int|string          $key            key to use
+     * @param           int|string|null     $secondaryKey   optional secondary key for multidimensional arrays
      * @throws          \DavidLienhard\InputWrapper\Exception if key does not exist
      */
-    public function raw(int|string $key) : int|float|string|bool|array|null
+    public function raw(int|string $key, int|string|null $secondaryKey = null) : int|float|string|bool|array|null
     {
         if (!\array_key_exists($key, $this->data)) {
             throw new InputWrapperException("key '".$key."' does not exist");
+        }
+
+        if ($secondaryKey !== null && \is_array($this->data[$key])) {
+            if (!\array_key_exists($secondaryKey, $this->data[$key])) {
+                throw new InputWrapperException("secondary key '".$secondaryKey."' does not exist");
+            }
+
+            return $this->data[$key][$secondaryKey];
+        }
+
+        return $this->data[$key];
+    }
+
+    /**
+     * returns one single element an the raw/original format
+     *
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
+     * @param           int|string          $key            key to use
+     * @param           int|string|null     $secondaryKey   optional secondary key for multidimensional arrays
+     * @throws          \DavidLienhard\InputWrapper\Exception if key does not exist
+     */
+    public function nullableRaw(int|string $key, int|string|null $secondaryKey = null) : int|float|string|bool|array|null
+    {
+        if (!\array_key_exists($key, $this->data)) {
+            return null;
+        }
+
+        if ($secondaryKey !== null && \is_array($this->data[$key])) {
+            if (!\array_key_exists($secondaryKey, $this->data[$key])) {
+                return null;
+            }
+
+            return $this->data[$key][$secondaryKey];
         }
 
         return $this->data[$key];
@@ -78,20 +120,19 @@ class InputCollection implements InputCollectionInterface
      *
      * @author          David Lienhard <github@lienhard.win>
      * @copyright       David Lienhard
-     * @param           int|string          $key         key to use
+     * @param           int|string          $key            key to use
+     * @param           int|string|null     $secondaryKey   optional secondary key for multidimensional arrays
      * @throws          \DavidLienhard\InputWrapper\Exception if key does not exist or cannot be converted
      */
-    public function asInt(int|string $key) : int
+    public function asInt(int|string $key, int|string|null $secondaryKey = null) : int
     {
-        if (!\array_key_exists($key, $this->data)) {
-            throw new InputWrapperException("key '".$key."' does not exist");
-        }
+        $raw = $this->raw($key, $secondaryKey);
 
-        if (\is_array($this->data[$key])) {
+        if (\is_array($raw)) {
             throw new InputWrapperException("cannot convert array to int");
         }
 
-        return \intval($this->data[$key]);
+        return \intval($raw);
     }
 
     /**
@@ -99,22 +140,21 @@ class InputCollection implements InputCollectionInterface
      *
      * @author          David Lienhard <github@lienhard.win>
      * @copyright       David Lienhard
-     * @param           int|string          $key         key to use
+     * @param           int|string          $key            key to use
+     * @param           int|string|null     $secondaryKey   optional secondary key for multidimensional arrays
      * @throws          \DavidLienhard\InputWrapper\Exception if key cannot be converted
      */
-    public function asNullableInt(int|string $key) : int|null
+    public function asNullableInt(int|string $key, int|string|null $secondaryKey = null) : int|null
     {
-        if (!\array_key_exists($key, $this->data)) {
-            return null;
-        }
+        $raw = $this->nullableRaw($key, $secondaryKey);
 
-        if (\is_array($this->data[$key])) {
+        if (\is_array($raw)) {
             throw new InputWrapperException("cannot convert array to int");
         }
 
-        return $this->data[$key] === null
+        return $raw === null
             ? null
-            : \intval($this->data[$key]);
+            : \intval($raw);
     }
 
     /**
@@ -122,20 +162,19 @@ class InputCollection implements InputCollectionInterface
      *
      * @author          David Lienhard <github@lienhard.win>
      * @copyright       David Lienhard
-     * @param           int|string          $key         key to use
+     * @param           int|string          $key            key to use
+     * @param           int|string|null     $secondaryKey   optional secondary key for multidimensional arrays
      * @throws          \DavidLienhard\InputWrapper\Exception if key does not exist or cannot be converted
      */
-    public function asFloat(int|string $key) : float
+    public function asFloat(int|string $key, int|string|null $secondaryKey = null) : float
     {
-        if (!\array_key_exists($key, $this->data)) {
-            throw new InputWrapperException("key '".$key."' does not exist");
-        }
+        $raw = $this->raw($key, $secondaryKey);
 
-        if (\is_array($this->data[$key])) {
+        if (\is_array($raw)) {
             throw new InputWrapperException("cannot convert array to float");
         }
 
-        return \floatval($this->data[$key]);
+        return \floatval($raw);
     }
 
     /**
@@ -143,22 +182,21 @@ class InputCollection implements InputCollectionInterface
      *
      * @author          David Lienhard <github@lienhard.win>
      * @copyright       David Lienhard
-     * @param           int|string          $key         key to use
+     * @param           int|string          $key            key to use
+     * @param           int|string|null     $secondaryKey   optional secondary key for multidimensional arrays
      * @throws          \DavidLienhard\InputWrapper\Exception if key cannot be converted
      */
-    public function asNullableFloat(int|string $key) : float|null
+    public function asNullableFloat(int|string $key, int|string|null $secondaryKey = null) : float|null
     {
-        if (!\array_key_exists($key, $this->data)) {
-            return null;
-        }
+        $raw = $this->nullableRaw($key, $secondaryKey);
 
-        if (\is_array($this->data[$key])) {
+        if (\is_array($raw)) {
             throw new InputWrapperException("cannot convert array to float");
         }
 
-        return $this->data[$key] === null
+        return $raw === null
             ? null
-            : \floatval($this->data[$key]);
+            : \floatval($raw);
     }
 
     /**
@@ -166,20 +204,19 @@ class InputCollection implements InputCollectionInterface
      *
      * @author          David Lienhard <github@lienhard.win>
      * @copyright       David Lienhard
-     * @param           int|string          $key         key to use
+     * @param           int|string          $key            key to use
+     * @param           int|string|null     $secondaryKey   optional secondary key for multidimensional arrays
      * @throws          \DavidLienhard\InputWrapper\Exception if key does not exist or cannot be converted
      */
-    public function asString(int|string $key) : string
+    public function asString(int|string $key, int|string|null $secondaryKey = null) : string
     {
-        if (!\array_key_exists($key, $this->data)) {
-            throw new InputWrapperException("key '".$key."' does not exist");
-        }
+        $raw = $this->raw($key, $secondaryKey);
 
-        if (\is_array($this->data[$key])) {
+        if (\is_array($raw)) {
             throw new InputWrapperException("cannot convert array to string");
         }
 
-        return \strval($this->data[$key]);
+        return \strval($raw);
     }
 
     /**
@@ -187,22 +224,21 @@ class InputCollection implements InputCollectionInterface
      *
      * @author          David Lienhard <github@lienhard.win>
      * @copyright       David Lienhard
-     * @param           int|string          $key         key to use
+     * @param           int|string          $key            key to use
+     * @param           int|string|null     $secondaryKey   optional secondary key for multidimensional arrays
      * @throws          \DavidLienhard\InputWrapper\Exception if key cannot be converted
      */
-    public function asNullableString(int|string $key) : string|null
+    public function asNullableString(int|string $key, int|string|null $secondaryKey = null) : string|null
     {
-        if (!\array_key_exists($key, $this->data)) {
-            return null;
-        }
+        $raw = $this->nullableRaw($key, $secondaryKey);
 
-        if (\is_array($this->data[$key])) {
+        if (\is_array($raw)) {
             throw new InputWrapperException("cannot convert array to string");
         }
 
-        return $this->data[$key] === null
+        return $raw === null
             ? null
-            : \strval($this->data[$key]);
+            : \strval($raw);
     }
 
     /**
@@ -210,20 +246,19 @@ class InputCollection implements InputCollectionInterface
      *
      * @author          David Lienhard <github@lienhard.win>
      * @copyright       David Lienhard
-     * @param           int|string          $key         key to use
+     * @param           int|string          $key            key to use
+     * @param           int|string|null     $secondaryKey   optional secondary key for multidimensional arrays
      * @throws          \DavidLienhard\InputWrapper\Exception if key does not exist or cannot be converted
      */
-    public function asBool(int|string $key) : bool
+    public function asBool(int|string $key, int|string|null $secondaryKey = null) : bool
     {
-        if (!\array_key_exists($key, $this->data)) {
-            throw new InputWrapperException("key '".$key."' does not exist");
-        }
+        $raw = $this->raw($key, $secondaryKey);
 
-        if (\is_array($this->data[$key])) {
+        if (\is_array($raw)) {
             throw new InputWrapperException("cannot convert array to bool");
         }
 
-        return \boolval($this->data[$key]);
+        return \boolval($raw);
     }
 
     /**
@@ -231,22 +266,21 @@ class InputCollection implements InputCollectionInterface
      *
      * @author          David Lienhard <github@lienhard.win>
      * @copyright       David Lienhard
-     * @param           int|string          $key         key to use
+     * @param           int|string          $key            key to use
+     * @param           int|string|null     $secondaryKey   optional secondary key for multidimensional arrays
      * @throws          \DavidLienhard\InputWrapper\Exception if key cannot be converted
      */
-    public function asNullableBool(int|string $key) : bool|null
+    public function asNullableBool(int|string $key, int|string|null $secondaryKey = null) : bool|null
     {
-        if (!\array_key_exists($key, $this->data)) {
-            return null;
-        }
+        $raw = $this->nullableRaw($key, $secondaryKey);
 
-        if (\is_array($this->data[$key])) {
+        if (\is_array($raw)) {
             throw new InputWrapperException("cannot convert array to bool");
         }
 
-        return $this->data[$key] === null
+        return $raw === null
             ? null
-            : \boolval($this->data[$key]);
+            : \boolval($raw);
     }
 
     /**
@@ -254,20 +288,19 @@ class InputCollection implements InputCollectionInterface
      *
      * @author          David Lienhard <github@lienhard.win>
      * @copyright       David Lienhard
-     * @param           int|string          $key         key to use
+     * @param           int|string          $key            key to use
+     * @param           int|string|null     $secondaryKey   optional secondary key for multidimensional arrays
      * @throws          \DavidLienhard\InputWrapper\Exception if key does not exist or cannot be converted
      */
-    public function asArray(int|string $key) : array
+    public function asArray(int|string $key, int|string|null $secondaryKey = null) : array
     {
-        if (!\array_key_exists($key, $this->data)) {
-            throw new InputWrapperException("key '".$key."' does not exist");
-        }
+        $raw = $this->raw($key, $secondaryKey);
 
-        if (!\is_array($this->data[$key])) {
+        if (!\is_array($raw)) {
             throw new InputWrapperException("cannot convert to array");
         }
 
-        return $this->data[$key];
+        return $raw;
     }
 
     /**
@@ -275,18 +308,17 @@ class InputCollection implements InputCollectionInterface
      *
      * @author          David Lienhard <github@lienhard.win>
      * @copyright       David Lienhard
-     * @param           int|string          $key         key to use
+     * @param           int|string          $key            key to use
+     * @param           int|string|null     $secondaryKey   optional secondary key for multidimensional arrays
      */
-    public function asNullableArray(int|string $key) : array|null
+    public function asNullableArray(int|string $key, int|string|null $secondaryKey = null) : array|null
     {
-        if (!\array_key_exists($key, $this->data)) {
-            return null;
-        }
+        $raw = $this->nullableRaw($key, $secondaryKey);
 
-        if (!\is_array($this->data[$key]) && !\is_null($this->data[$key])) {
+        if (!\is_array($raw) && !\is_null($raw)) {
             throw new InputWrapperException("cannot convert to array");
         }
 
-        return $this->data[$key];
+        return $raw;
     }
 }
