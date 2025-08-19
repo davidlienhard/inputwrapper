@@ -27,9 +27,11 @@ class Input implements InputInterface
     /** contents of post superglobal */
     private InputCollectionInterface $post;
 
-
     /** contents of files superglobal */
     private InputCollectionInterface $files;
+
+    /** contents of server superglobal */
+    private InputCollectionInterface $server;
 
 
     /**
@@ -43,6 +45,7 @@ class Input implements InputInterface
         $this->get = new InputCollection($_GET);
         $this->post = new InputCollection($_POST);
         $this->files = new InputCollection($_FILES);
+        $this->server = new InputCollection($_SERVER);
     }
 
     /**
@@ -76,5 +79,16 @@ class Input implements InputInterface
     public function files() : InputCollectionInterface
     {
         return $this->files;
+    }
+
+    /**
+     * returns the contents of the _SERVER superglobal as an InputCollectionInterface
+     *
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
+     */
+    public function server() : InputCollectionInterface
+    {
+        return $this->server;
     }
 }
