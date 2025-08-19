@@ -30,6 +30,9 @@ class Stub implements InputInterface
     /** contents of files superglobal */
     private InputCollectionInterface $files;
 
+    /** contents of server superglobal */
+    private InputCollectionInterface $server;
+
 
     /**
      * store contents of superglobals in this object
@@ -42,6 +45,7 @@ class Stub implements InputInterface
         $this->get = new InputCollection($_GET);
         $this->post = new InputCollection($_POST);
         $this->files = new InputCollection($_FILES);
+        $this->server = new InputCollection($_SERVER);
     }
 
     /**
@@ -78,6 +82,17 @@ class Stub implements InputInterface
     }
 
     /**
+     * returns the contents of the _SERVER superglobal as an InputCollectionInterface
+     *
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
+     */
+    public function server() : InputCollectionInterface
+    {
+        return $this->server;
+    }
+
+    /**
      * adds payload to get data
      *
      * @author          David Lienhard <github@lienhard.win>
@@ -111,5 +126,17 @@ class Stub implements InputInterface
     public function addFilesPayload(array $payload) : void
     {
         $this->files = new InputCollection($payload);
+    }
+
+    /**
+     * adds payload to server data
+     *
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
+     * @param       array      $payload        payload to add
+     */
+    public function addServerPayload(array $payload) : void
+    {
+        $this->server = new InputCollection($payload);
     }
 }
