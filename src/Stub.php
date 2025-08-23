@@ -33,6 +33,9 @@ class Stub implements InputInterface
     /** contents of server superglobal */
     private InputCollectionInterface $server;
 
+    /** contents of session superglobal */
+    private InputCollectionInterface $session;
+
 
     /**
      * store contents of superglobals in this object
@@ -46,6 +49,7 @@ class Stub implements InputInterface
         $this->post = new InputCollection($_POST);
         $this->files = new InputCollection($_FILES);
         $this->server = new InputCollection($_SERVER);
+        $this->session = new InputCollection($_SESSION);
     }
 
     /**
@@ -90,6 +94,17 @@ class Stub implements InputInterface
     public function server() : InputCollectionInterface
     {
         return $this->server;
+    }
+
+    /**
+     * returns the contents of the _SESSION superglobal as an InputCollectionInterface
+     *
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
+     */
+    public function session() : InputCollectionInterface
+    {
+        return $this->session;
     }
 
     /**
@@ -138,5 +153,17 @@ class Stub implements InputInterface
     public function addServerPayload(array $payload) : void
     {
         $this->server = new InputCollection($payload);
+    }
+
+    /**
+     * adds payload to session data
+     *
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
+     * @param       array      $payload        payload to add
+     */
+    public function addSessionPayload(array $payload) : void
+    {
+        $this->session = new InputCollection($payload);
     }
 }
