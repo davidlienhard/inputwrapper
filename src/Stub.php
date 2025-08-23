@@ -49,7 +49,7 @@ class Stub implements InputInterface
         $this->post = new InputCollection($_POST);
         $this->files = new InputCollection($_FILES);
         $this->server = new InputCollection($_SERVER);
-        $this->session = new InputCollection($_SESSION);
+        $this->session = new InputCollection($_SESSION ?? []);
     }
 
     /**
